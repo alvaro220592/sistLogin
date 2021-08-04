@@ -1,0 +1,52 @@
+Login/autenticação:
+
+Será criado um banco de dados pras tabelas de usuário e autenticação e uma estrutura básica de views antes
+    nesse exemplo será usado o jetstream, o qual é instalado via composer.
+	depois o livewire, q fornece componentes de autenticação do blade(se tivesse usando vue, seria outro pacote.
+
+    Os comandos serão dados pelo terminal na pasta raíz do projeto
+
+	inst o jetstream:
+	composer require laravel/jetstream 
+
+	inst o livewire:
+	php artisan jetstream:install livewire
+
+	dá um migrate, pois novas tabelas foram criadas automaticamente
+
+	'npm install'
+
+	'npm run dev' 
+
+	foi gerada automaticamente rota de login e registro, assim como arquivos blade.
+    adicionarei o link de sair na nav
+	É só se registrar normal pq a tabela de usuários ja tá feita
+
+	Diretiva @guest:
+        Guest significa convidado, nesse caso é quem não está logado.
+        Se o usuário que não está logado tem acesso a uma página e se você deseja que ele veja um elemento como um link de "Entrar" ou "Registrar", basta envolver esse elemento pela diretiva @guest. Quem estiver logado não precisa ver o link de entrar, pois já tá dentro.
+
+        tipo assim:
+        @guest
+            <a class="navbar-brand" href="">Entrar</a>
+            <a class="navbar-brand" href="">Registrar</a>
+        @endguest
+	
+	Esse caso é pra quando não é necessário estar autenticado pra ver a página
+
+    Diretiva @auth:    
+	    define a visualização de coisas pra quem tá autenticado, tipo um link "Sair", "Cadastros", etc.
+
+        tipo assim:
+        @auth
+            <a class="navbar-brand" href="">Sair</a>
+        @endauth
+
+    Logout:
+	    O logout é criado em um link dentro de um formulário pra fazer a action dele que aponta pra rota criada automaticamente na execução do jetstream. A partir dessa rota, ele executa uns comandos Javascript do próprio jetstream
+
+    Dica:
+        Pra impedir que uma pessoa não autenticada veja uma página, por exemplo, use o "->middleware('auth');":
+        Route::get('/cadastros', [ClientController::class, 'cadastrar'])->middleware('auth');
+
+Autenticação com Laravel Jetstream: https://laraveling.tech/autenticacao-jetstream-laravel-8/
